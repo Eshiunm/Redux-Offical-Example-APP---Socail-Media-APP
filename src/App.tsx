@@ -6,7 +6,7 @@ import { AddPostForm } from './features/posts/AddPostForm'
 
 function App() {
   return (
-    <Router>
+    <Router basename="/Redux-Offical-Example-APP_Social-Media-APP">
       <Navbar />
       <div className="App">
         <Routes>

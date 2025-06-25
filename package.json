@@ -34,7 +34,10 @@
     "vite": "^5.0.11"
   },
   "msw": {
-    "workerDirectory": "public"
+    "workerDirectory": [
+      "public",
+      "dist"
+    ]
   },
   "packageManager": "yarn@4.2.2"
 }

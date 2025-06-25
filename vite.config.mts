@@ -11,5 +11,5 @@ export default defineConfig({
   server: {
     open: true,
   },
-  base:"/Redux-Offical-Example-APP---Socail-Media-APP/"
+  base:"/Redux-Offical-Example-APP_Social-Media-APP/"
 })

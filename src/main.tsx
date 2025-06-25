@@ -11,8 +11,10 @@ import './index.css'
 
 // Wrap app rendering so we can wait for the mock API to initialize
 async function start() {
-  // Start our mock API server
-  await worker.start({ onUnhandledRequest: 'bypass' })
+  // Start our mock API server only in development
+  if (process.env.NODE_ENV === 'development') {
+    await worker.start({ onUnhandledRequest: 'bypass' })
+  }
 
   const root = createRoot(document.getElementById('root')!)
 
