@@ -11,5 +11,5 @@ export default defineConfig({
   server: {
     open: true,
   },
-  base:"/Redux-Offical-Example-APP_Social-Media-APP/"
+  base: process.env.NODE_ENV === 'production' ? "/Redux-Offical-Example-APP_Social-Media-APP/" : "/"
 })
