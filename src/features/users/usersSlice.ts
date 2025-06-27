@@ -1,12 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import type { RootState } from '@/app/store'
+import { selectCurrentUsername } from '../auth/authSlice'
 
 interface User {
   id: string
   name: string
 }
-
+export const selectCurrentUser = (state: RootState) => {
+  const currentUsername = selectCurrentUsername(state)
+  return selectUserById(state, currentUsername)
+}
 const initialState: User[] = [
   { id: '0', name: 'Tianna Jenkins' },
   { id: '1', name: 'Kevin Grant' },
