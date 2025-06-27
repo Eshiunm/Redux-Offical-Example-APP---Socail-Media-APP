@@ -1,12 +1,23 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom'
 
 import { Navbar } from './components/Navbar'
 import { PostsMainPage } from './features/posts/PostsMainPage'
 import { SinglePostPage } from './features/posts/SinglePostPage'
 import { EditPostForm } from './features/posts/EditPostForm'
+import { LoginPage } from './features/auth/LoginPage'
+import { useAppSelector } from './app/hooks'
 
 // 取得正確的 basename，開發環境為空，生產環境為 GitHub Pages 路徑
 const basename = process.env.NODE_ENV === 'production' ? '/Redux-Offical-Example-APP_Social-Media-APP' : ''
+const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+  const username = useAppSelector(selectCurrentUsername)
+
+  if (!username) {
+    return <Navigate to="/" replace />
+  }
+
+  return children
+}
 
 function App() {
   return (
@@ -14,9 +25,19 @@ function App() {
       <Navbar />
       <div className="App">
         <Routes>
-          <Route path="/" element={<PostsMainPage/>}/>
-          <Route path="/posts/:postId" element={<SinglePostPage/>} />
-          <Route path="/editPost/:postId" element={<EditPostForm />} />
+          <Route path="/" element={<LoginPage />} />
+          <Route
+            path="/*"
+            element={
+              <ProtectedRoute>
+                <Routes>
+                  <Route path="/posts" element={<PostsMainPage />} />
+                  <Route path="/posts/:postId" element={<SinglePostPage />} />
+                  <Route path="/editPost/:postId" element={<EditPostForm />} />
+                </Routes>
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </div>
     </Router>
@@ -24,3 +45,7 @@ function App() {
 }
 
 export default App
+function selectCurrentUsername(state: { posts: Post[]; users: User[]; auth: AuthState }): unknown {
+  throw new Error('Function not implemented.')
+}
+
