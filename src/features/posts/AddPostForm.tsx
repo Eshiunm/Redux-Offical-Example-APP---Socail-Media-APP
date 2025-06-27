@@ -1,6 +1,5 @@
 import React from 'react'
 import { useAppDispatch } from '@/app/hooks'
-import { nanoid } from '@reduxjs/toolkit'
 import { postAdded } from './postsSlice'
 
 // TS types for the input fields

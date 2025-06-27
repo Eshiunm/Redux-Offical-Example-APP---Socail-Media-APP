@@ -8,6 +8,8 @@ export interface Post {
   user: string 
 }
 
+type PostUpdate = Pick<Post, 'id' | 'title' | 'content'>
+
 // Create an initial state value for the reducer, with that type
 const initialState: Post[] = [
   { id: '1', title: 'First Post!', content: 'Hello!', user: '0' },
@@ -20,16 +22,16 @@ const postsSlice = createSlice({
   initialState,
   reducers: {
     postAdded:{
-        reducer(state:Post[], action: PayloadAction<Post>) {
+      reducer(state:Post[], action: PayloadAction<Post>) {
         state.push(action.payload)
       },
-      prepare(title: string, content: string) {
+      prepare(title: string, content: string, userId: string) {
         return {
-          payload: { id: nanoid(), title, content }
+          payload: { id: nanoid(), title, content, user: userId }
         }
       }
     },
-    postUpdated(state, action: PayloadAction<Post>) { 
+    postUpdated(state, action: PayloadAction<PostUpdate>) { 
       const { id, title, content } = action.payload
       const existingPost = state.find(post => post.id === id)
       if (existingPost) {
