@@ -6,6 +6,7 @@ import { SinglePostPage } from './features/posts/SinglePostPage'
 import { EditPostForm } from './features/posts/EditPostForm'
 import { LoginPage } from './features/auth/LoginPage'
 import { useAppSelector } from './app/hooks'
+import { selectCurrentUsername } from './features/auth/authSlice'
 
 // 取得正確的 basename，開發環境為空，生產環境為 GitHub Pages 路徑
 const basename = process.env.NODE_ENV === 'production' ? '/Redux-Offical-Example-APP_Social-Media-APP' : ''
@@ -45,7 +46,5 @@ function App() {
 }
 
 export default App
-function selectCurrentUsername(state: { posts: Post[]; users: User[]; auth: AuthState }): unknown {
-  throw new Error('Function not implemented.')
-}
+
 
