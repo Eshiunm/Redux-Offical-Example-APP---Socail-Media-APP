@@ -1,17 +1,15 @@
 import { Link, useParams } from 'react-router-dom'
-
 import { useAppSelector } from '@/app/hooks'
+import { selectPostById } from './PostList'
 
 export const SinglePostPage = () => {
   const { postId } = useParams()
 
-  const post = useAppSelector(state =>
-    state.posts.find(post => post.id === postId)
-  )
+  const post = useAppSelector( state => selectPostById(state, postId!))
 
   if (!post) {
     return (
-      <section>
+      <section>【
         <h2>Post not found!</h2>
       </section>
     )

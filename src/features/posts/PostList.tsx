@@ -1,9 +1,13 @@
 import { useAppSelector } from '@/app/hooks'
+import { RootState } from '@/app/store'
 import { Link } from 'react-router-dom'
+
+export const selectAllPosts = (state: RootState) => state.posts;
+export const selectPostById = (state: RootState, postId: string) => state.posts.find(post => post.id === postId);
 
 export const PostsList = () => {
   // Select the `state.posts` value from the store into the component
-  const posts = useAppSelector(state => state.posts)
+  const posts = useAppSelector(selectAllPosts);
 
   const renderedPosts = posts.map(post => (
     <article className="post-excerpt" key={post.id}>

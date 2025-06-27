@@ -5,12 +5,13 @@ export interface Post {
   id: string
   title: string
   content: string
+  user: string 
 }
 
 // Create an initial state value for the reducer, with that type
 const initialState: Post[] = [
-  { id: '1', title: 'First Post!', content: 'Hello!' },
-  { id: '2', title: 'Second Post', content: 'More text' }
+  { id: '1', title: 'First Post!', content: 'Hello!', user: '0' },
+  { id: '2', title: 'Second Post', content: 'More text', user: '1' }
 ]
 
 // Create the slice and pass in the initial state
