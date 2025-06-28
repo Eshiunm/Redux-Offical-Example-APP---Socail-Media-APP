@@ -1,5 +1,6 @@
 import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit'
 import { sub } from 'date-fns' // 新增的程式碼
+import { userLoggedOut } from '../auth/authSlice'
 
 // Define a TS type for the data we'll be using
 
@@ -17,7 +18,7 @@ export interface Post {
   title: string
   content: string
   user: string 
-  date?: string // Optional, as it may not be provided in all cases
+  date: string // Optional, as it may not be provided in all cases
   reactions: Reactions
 }
 export interface Reactions {
@@ -77,7 +78,15 @@ const postsSlice = createSlice({
       if (existingPost) {
         existingPost.reactions[reaction]++
       }
-    }
+    },
+    
+  },
+  extraReducers: (builder) => {
+    // Pass the action creator to `builder.addCase()`
+    builder.addCase(userLoggedOut, (state) => {
+      // Clear out the list of posts whenever the user logs out
+      return []
+  })
   }
 })
 
